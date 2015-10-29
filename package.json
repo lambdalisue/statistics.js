@@ -10,7 +10,7 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "jsdoc": "^3.3.3",
-    "mocha": "^2.3.3",
+    "mocha": "^2.3.3"
   },
   "scripts": {
     "test": "mocha",
@@ -27,7 +27,7 @@
     "math"
   ],
   "author": "Alisue",
-  "license": "MIT license",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lambdalisue/statistics.js/issues"
   },
