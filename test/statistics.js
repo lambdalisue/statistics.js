@@ -1,10 +1,8 @@
 "use strict";
 var undefined;
 if (typeof window === 'undefined') {
-    var sh = require('shelljs');
-    console.log("This script is working on " + sh.pwd());
     var chai = require('chai');
-    var statistics = require('js/statistics');
+    var statistics = require('../js/statistics');
 }
 var expect = chai.expect;
 var DEFAULT_DIGITS = 13;
