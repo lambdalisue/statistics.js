@@ -1,5 +1,5 @@
-# statistic.js [![Build Status](https://travis-ci.org/lambdalisue/statistic.js.svg)](https://travis-ci.org/lambdalisue/statistic.js)
+# statistic.js [![Build Status](https://travis-ci.org/lambdalisue/statistics.js.svg)](https://travis-ci.org/lambdalisue/statistics.js)
 
-An independent small javascript statistic utility and library.
+An independent simple statistics library
 
-http://lambdalisue.github.io/statistic.js
+http://lambdalisue.github.io/statistics.js
