@@ -7,17 +7,15 @@
     "doc": "doc",
     "test": "test"
   },
-  "dependencies": {
-    "chai": "^3.4.0"
-  },
   "devDependencies": {
     "chai": "^3.4.0",
+    "dotenv": "^1.2.0",
     "jsdoc": "^3.3.3",
     "mocha": "^2.3.3"
   },
   "scripts": {
     "test": "mocha",
-    "posttest": "./node_modules/jsdoc/jsdoc.js -d doc ./js/*.js"
+    "posttest": "./node_modules/jsdoc/jsdoc.js -c doc/conf.json"
   },
   "repository": {
     "type": "git",

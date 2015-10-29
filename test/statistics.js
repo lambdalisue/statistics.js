@@ -1,8 +1,10 @@
 "use strict";
 var undefined;
 if (typeof window === 'undefined') {
+    require('dotenv').load();
+    var root = process.env.TRAVIS_BUILD_DIR || '';
+    var statistics = require(root + 'js/statistics');
     var chai = require('chai');
-    var statistics = require('js/statistics');
 }
 var expect = chai.expect;
 var DEFAULT_DIGITS = 13;
