@@ -1,0 +1,13 @@
+{
+  "source": {
+    "include": [
+      "js/statistics.js"
+    ]
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "opts": {
+    "destination": "./doc"
+  }
+}
