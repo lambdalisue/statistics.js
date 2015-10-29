@@ -3,3 +3,4 @@
 An independent simple statistics library
 
 http://lambdalisue.github.io/statistics.js
+http://lambdalisue.github.io/statistics.js/doc/
