@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: F</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Namespace: F</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="module-statistics.html">statistics</a>.</span>
+        
+        F
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">A namespace of functions which related to Snedecor's F distribution</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line565">line 565</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/F-distribution">https://en.wikipedia.org/wiki/F-distribution</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/F-test">https://en.wikipedia.org/wiki/F-test</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".calc"><span class="type-signature">(static) </span>calc<span class="signature">(u1, s1, n1, u2, s2, n2)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Return a test statistic of F-test which follow Snedecor's F distribution.
+The variance of the sample1 must be larger or equal to sample2.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>u1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A mean value (<span style="text-decoration:overline">X</span><sub>1</sub>) of sample 1 (<strong>dummy, not used</strong>).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A variance (s<sub>1</sub><sup>2</sup>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of samples (N<sub>1</sub>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>u2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A mean value (<span style="text-decoration:overline">X</span><sub>2</sub>) of sample 2 (<strong>dummy, not used</strong>).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A variance (s<sub>2</sub><sup>2</sup>) of sample 2.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of samples (N<sub>2</sub>) of sample 2.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line593">line 593</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/F-test">https://en.wikipedia.org/wiki/F-test</a></li>
+        
+            <li><a href="module-statistics.F.html#.pdf">module:statistics.F.pdf</a></li>
+        
+            <li><a href="module-statistics.F.html#.cdf">module:statistics.F.cdf</a></li>
+        
+            <li><a href="module-statistics.F.html#.pvalue">module:statistics.F.pvalue</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        Will throw an error when s1 is smaller than s2
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An array which contains a F-test statistic and a degree of freedom of sample 1 and 2 respectively.
+                <code>[F, &nu;<sub>1</sub>, &nu;<sub>2</sub>]</code>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// return [2, 2, 1]
+statistics.F.calc(null, 4, 3, null, 2, 2);
+// return [3, 3, 3]
+statistics.F.calc(null, 6, 4, null, 2, 3);
+// throw an Error('s1 requires to be larger than s2')
+statistics.F.calc(null, 6, 4, null, 12, 3);
+// Calculate p-value of two sample distribution
+statistics.F.pvalue.apply(null, statistics.F.calc(null, 6, 4, null, 2, 3));</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".cdf"><span class="type-signature">(static) </span>cdf<span class="signature">(x, d1, d2)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+<div class="description">
+    A cummulative distribution function of Snedecor's F distribution.
+It use a <a href="module-statistics.html#.betaic">betaic</a> function internally.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A random X value</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>d1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A d<sub>1</sub> parameter of F distribution</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>d2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A d<sub>2</sub> parameter of F distribution</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line645">line 645</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/F-distribution">https://en.wikipedia.org/wiki/F-distribution</a></li>
+        
+            <li><a href="module-statistics.html#.betaic">module:statistics.betaic</a></li>
+        
+            <li><a href="module-statistics.F.html#.calc">module:statistics.F.calc</a></li>
+        
+            <li><a href="module-statistics.F.html#.pdf">module:statistics.F.pdf</a></li>
+        
+            <li><a href="module-statistics.F.html#.pvalue">module:statistics.F.pvalue</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Calculate cummulative probability of two sample distribution
+statistics.F.cdf.apply(null, statistics.F.calc(null, 6, 4, null, 2, 3));</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".pdf"><span class="type-signature">(static) </span>pdf<span class="signature">(x, d1, d2)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+<div class="description">
+    A probability density function of Snedecor's F distribution.
+It use a <a href="module-statistics.html#.beta">beta</a> function internally.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A random X value</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>d1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A d<sub>1</sub> parameter of F distribution</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>d2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A d<sub>2</sub> parameter of F distribution</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line617">line 617</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/F-distribution">https://en.wikipedia.org/wiki/F-distribution</a></li>
+        
+            <li><a href="module-statistics.html#.beta">module:statistics.beta</a></li>
+        
+            <li><a href="module-statistics.F.html#.calc">module:statistics.F.calc</a></li>
+        
+            <li><a href="module-statistics.F.html#.cdf">module:statistics.F.cdf</a></li>
+        
+            <li><a href="module-statistics.F.html#.pvalue">module:statistics.F.pvalue</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Calculate probability of two sample distribution
+statistics.F.pdf.apply(null, statistics.F.calc(null, 6, 4, null, 2, 3));</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".pvalue"><span class="type-signature">(static) </span>pvalue<span class="signature">(x, d1, d2)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Calculate an one-tailed p-value of a F-test statistic which can obtain
+from <a href="module-statistics.F.html#.calc">module:statistics.F.calc</a>.
+It use a <a href="module-statistics.F.html#.cdf">cdf</a> function internally.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A F-test statistic</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>d1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A d<sub>1</sub> parameter of F distribution</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>d2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A d<sub>2</sub> parameter of F distribution</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line668">line 668</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/F-distribution">https://en.wikipedia.org/wiki/F-distribution</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/P-value">https://en.wikipedia.org/wiki/P-value</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/One-_and_two-tailed_tests">https://en.wikipedia.org/wiki/One-_and_two-tailed_tests</a></li>
+        
+            <li><a href="module-statistics.F.html#.calc">module:statistics.F.calc</a></li>
+        
+            <li><a href="module-statistics.F.html#.cdf">module:statistics.F.cdf</a></li>
+        
+            <li><a href="module-statistics.F.html#.pdf">module:statistics.F.pdf</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Calculate p-value of two sample distribution
+statistics.F.pvalue.apply(null, statistics.F.calc(null, 6, 4, null, 2, 3));</code></pre>
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-statistics.html">statistics</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-statistics.F.html">F</a></li><li><a href="module-statistics.T.html">T</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.3</a> on Thu Oct 29 2015 20:56:16 GMT+0900 (JST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

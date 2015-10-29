@@ -1,0 +1,38 @@
+{
+  "name": "statistic.js",
+  "version": "0.1.0",
+  "description": "An independent simple statistics library written in pure javascript",
+  "main": "package.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^3.4.0"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "jsdoc": "^3.3.3",
+    "mocha": "^2.3.3"
+  },
+  "scripts": {
+    "test": "mocha",
+    "posttest": "./node_modules/jsdoc/jsdoc.js -d doc ./js/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/lambdalisue/statistics.js.git"
+  },
+  "keywords": [
+    "javascript",
+    "statistics",
+    "library",
+    "math"
+  ],
+  "author": "Alisue",
+  "license": "MIT license",
+  "bugs": {
+    "url": "https://github.com/lambdalisue/statistics.js/issues"
+  },
+  "homepage": "https://github.com/lambdalisue/statistics.js#readme"
+}

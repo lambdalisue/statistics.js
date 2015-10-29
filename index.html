@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset=utf-8 />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>statistics.js</title>
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300|Merriweather">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://rawgit.com/gionkunz/chartist-js/master/dist/chartist.min.css">
+<link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/typography.css">
+
+<header>
+  <h1><a href="/statistics.js/">statistics.js</a></h1>
+  <h2 class="subscription">An independent javascript statistics utility and library</h2>
+  <div id="github-buttons">
+    <iframe
+      src="https://ghbtns.com/github-btn.html?user=lambdalisue&repo=statistics.js&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+
+    <iframe
+      src="https://ghbtns.com/github-btn.html?user=lambdalisue&repo=statistics.js&type=fork&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+
+    <iframe src="https://ghbtns.com/github-btn.html?user=lambdalisue&type=follow&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+  </div>
+</header>
+
+<h2>Behavior test via Mocha</h2>
+<div id="mocha"></div>
+
+<footer>
+  <p>&copy; 2015 hashnote.net, &Lambda;lisue
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.4.0/chai.min.js"></script>
+<script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="js/statistics.js"></script>
+
+<script>mocha.setup('bdd')</script>
+<script src="test/statistics.js"></script>
+<script>
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+</script>
+</html>
