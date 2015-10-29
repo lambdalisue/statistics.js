@@ -9,13 +9,12 @@
   },
   "devDependencies": {
     "chai": "^3.4.0",
-    "dotenv": "^1.2.0",
     "jsdoc": "^3.3.3",
     "mocha": "^2.3.3"
   },
   "scripts": {
     "test": "mocha",
-    "posttest": "./node_modules/jsdoc/jsdoc.js -c doc/conf.json"
+    "posttest": "jsdoc -c doc/conf.json"
   },
   "repository": {
     "type": "git",
@@ -32,5 +31,5 @@
   "bugs": {
     "url": "https://github.com/lambdalisue/statistics.js/issues"
   },
-  "homepage": "https://github.com/lambdalisue/statistics.js#readme"
+  "homepage": "http://lambdalisue.github.io/statistics.js/"
 }

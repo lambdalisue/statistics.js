@@ -2,9 +2,7 @@
 var undefined;
 if (typeof window === 'undefined') {
     var chai = require('chai');
-    require('dotenv').load();
-    var root = process.env.TRAVIS_BUILD_DIR + '/' || '';
-    var statistics = require(root + 'js/statistics');
+    var statistics = require('js/statistics');
 }
 var expect = chai.expect;
 var DEFAULT_DIGITS = 13;
