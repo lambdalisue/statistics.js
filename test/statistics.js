@@ -2,7 +2,7 @@
 var undefined;
 if (typeof window === 'undefined') {
     var chai = require('chai');
-    var statistics = require('js/statistics.js');
+    var statistics = require('js/statistics');
 }
 var expect = chai.expect;
 var DEFAULT_DIGITS = 13;
