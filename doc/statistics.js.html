@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: statistics.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: statistics.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>;(function(exports) {
+    /**
+    * An independent statistics module
+    *
+    * @module  statistics
+    * @author  lambdalisue@hashnote.net (Alisue)
+    * @license MIT license
+    */
+    "use strict";
+    var undefined;  // make sure that the 'undefined' is undefined;
+
+    // alias
+    var PI    = Math.PI;
+    var PI2   = PI * 2;
+    var E     = Math.E;
+    var exp   = Math.exp;
+    var log   = Math.log;
+    var pow   = Math.pow;
+    var sqrt  = Math.sqrt;
+    var round = Math.round;
+
+    // internal helper functions
+    var isInt = function(x) { return (x | 0) === x; };
+    var isInf = function(x) {
+        return x == Number.POSITIVE_INFINITY || x == Number.NEGATIVE_INFINITY;
+    };
+
+    var array =
+    /**
+     * Convert an array like object into an array
+     *
+     * @param {Object} arrLike - An array like object
+     * @return {Array}
+     */
+    exports.array = function(arrLike) {
+        return Array.prototype.slice.call(arrLike);
+    };
+
+    var memoize =
+    /**
+     * Convert a function into a memoizationable function
+     *
+     * @param {Function} fn - A function
+     * @return {Function} A function which is memoizationed
+     */
+    exports.memoize = function(fn) {
+        var wrapped = function () {
+            var args = array(arguments);
+            var hash = "";
+            args.map(function(currentArg) {
+                hash += (currentArg == Object(currentArg))
+                    ? JSON.stringify(currentArg)
+                    : currentArg;
+            });
+            return (hash in fn.memoize)
+                ? fn.memoize[hash]
+                : fn.memoize[hash] = fn.apply(wrapped, args);
+        };
+        fn.memoize = {};
+        return wrapped;
+    };
+
+    var factorial =
+    /**
+     * Calculate a factorial via memoization tech.
+     *
+     * @method
+     * @param {Number} n - A natural number
+     * @return {Number}
+     */
+    exports.factorial = memoize(function(n) {
+        if (n === 0 || n === 1) return 1;
+        return factorial(n-1) * n;
+    });
+
+    var contfrac =
+    /**
+     * Calculate a continued fraction via a/b generator function.
+     * Ported from a python code in
+     * [Rosetta Code]{@link http://rosettacode.org/wiki/Continued_fraction#Fast_iterative_version}
+     *
+     * @param {Number} n - The number of iteration
+     * @param {Function} fn - A function which obtain current index and return
+     *                        a list which contains values of a and b
+     * @return {Number}
+     * @see {@link http://rosettacode.org/wiki/Continued_fraction#Fast_iterative_version}
+     * @example
+     * // return a value of sqrt(2)
+     * var fsqrt2 = function(n) {
+     *     return [n > 0 ? 2 : 1, 1];
+     * };
+     * statistics.contfrac(200, fsqrt2);
+     *
+     * // return a value of e (napier)
+     * var fnapier = function(n) {
+     *     return [n > 0 ? n : 2, n > 1 ? n-1 : 1];
+     * };
+     * statistics.contfrac(200, fnapier);
+     *
+     * // return a value of pi
+     * var fpi = function(n) {
+     *     return [n > 0 ? 6 : 3, Math.pow(2 * n - 1, 2)];
+     * };
+     * statistics.contfrac(200, fpi);
+     */
+    exports.contfrac = function(n, fn) {
+        var partial = 0;
+        var k, r;
+        for (k=n+1; k>0; k--) {
+            r = fn(k);
+            partial = r[1] / (r[0] + partial);
+        }
+        return fn(0)[0] + partial;
+    };
+
+    var range =
+    /**
+     * Create an array with continueous numbers.
+     * If the step argument is omitted, it defaults to 1.
+     * If the stop argument is omitted, the value of stop is set to start
+     * and the value of start become 0.
+     * If the step argument is 0, it raise Error.
+     *
+     * For a positive step, the contents of a range r are determined by the
+     * formula r[i] = start + step * i where i >= 0 and r[i] &lt; stop.
+     *
+     * For a negative step, the contents of the range are still determined by
+     * the formula r[i] = start + step * i, but the constraints are i >= 0 and
+     * r[i] > stop.
+     *
+     * If digits argument is specified, it call toFixed method with the
+     * value before adding to the contents.
+     *
+     * @param {Number} start A start or stop value.
+     * @param {Number} [stop] A stop value
+     * @param {Number} [step] A step value. Default is 1.
+     * @param {Number} [digits] A digits argument of toFixed method if specified
+     * @return {Array}
+     * @example
+     * // return [0, 1, 2, ... , 7, 8, 9]
+     * statistics.range(10);
+     * // return [0, 3, 6, 9]
+     * statistics.range(0, 10, 3);
+     * // return [0, -1, -2, ... , -7, -8, -9]
+     * statistics.range(0, -10, -1);
+     * // return [0, 0.2, 0.4, 0.6, 0.8]
+     * statistics.range(0, 1, 0.2, 1);
+     * // return []
+     * statistics.range(0);
+     * // return []
+     * statistics.range(1, 0);
+     */
+    exports.range = function(start, stop, step, digits) {
+        var _start = stop === undefined ? 0 : start;
+        var _stop  = stop === undefined ? start : stop;
+        var _step  = step === undefined ? 1 : step;
+        if (_step === 0) throw new Error('step argument cannot be 0');
+        var trans = digits
+            ? function(x) {
+                return parseFloat(x.toFixed(digits));
+            }
+            : function(x) {
+                return x;
+            };
+        var X = [];
+        if (_step > 0) {
+            for (var i=_start; i&lt;_stop; i+=_step) X.push(trans(i));
+        } else {
+            for (var i=_start; i>_stop; i+=_step) X.push(trans(i));
+        }
+        return X;
+    };
+
+    var sum =
+    /**
+     * Calculate a summation of an array
+     *
+     * @param {Array} X An array
+     * @return {Number}
+     * @example
+     * // return 5
+     * statistics.sum([1, 1, 1, 1, 1]);
+     */
+    exports.sum = function(X) {
+        return array(X).reduce(function(a, b) {
+            return a + b;
+        });
+    };
+    var mean =
+    /**
+     * Calculate an arithmetic mean value of an array
+     *
+     * @param {Array} X An array
+     * @return {Number}
+     * @example
+     * // return 3
+     * statistics.mean([1, 2, 3, 4, 5]);
+     * // return 22
+     * statistics.mean([1, 2, 3, 4, 100]);
+     * // return 3.5
+     * statistics.mean([1, 2, 3, 4, 5, 6]);
+     * // return 12.5
+     * statistics.mean([1, 2, 3, 4, 5, 60]);
+     */
+    exports.mean = function(X) {
+        var t = sum(X);
+        return t/X.length;
+    };
+    var median =
+    /**
+     * Calculate an median value of an array
+     *
+     * @param {Array} X An array
+     * @return {Number}
+     * @example
+     * // return 3
+     * statistics.median([1, 2, 3, 4, 5]);
+     * // return 3
+     * statistics.median([1, 2, 3, 4, 100]);
+     * // return 3.5
+     * statistics.median([1, 2, 3, 4, 5, 6]);
+     * // return 3.5
+     * statistics.median([1, 2, 3, 4, 5, 60]);
+     */
+    exports.median = function(X) {
+        var anchor = parseInt(X.length/2);
+        var sorted = array(X);
+        // Otherwise js sort items via Unicode code point order
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+        sorted.sort(function(a, b){ return a-b; });
+        if (sorted.length % 2) {
+            return sorted[anchor];
+        } else {
+            return (sorted[anchor-1] + sorted[anchor]) / 2;
+        }
+    };
+    var max =
+    /**
+     * Find a maximum value in an array
+     *
+     * @param {Array} X An array
+     * @return {Number}
+     * @example
+     * // return 5
+     * statistics.max([1, 2, 3, 4, 5]);
+     */
+    exports.max = function(X) {
+        return Math.max.apply(null, array(X));
+    };
+    var min =
+    /**
+     * Find a minimum value in an array
+     *
+     * @param {Array} X An array
+     * @return {Number}
+     * @example
+     * // return 1
+     * statistics.min([1, 2, 3, 4, 5]);
+     */
+    exports.min = function(X) {
+        return Math.min.apply(null, array(X));
+    };
+    var deviation =
+    /**
+     * Calculate a deviation of an array
+     *
+     * @param {Array} X An array
+     * @return {Array} A deviation array of the array
+     * @example
+     * // return [3, 1, 1, 1, 0, 0, -2, -4]
+     * statistics.deviation([2, 4, 4, 4, 5, 5, 7, 9]);
+     */
+    exports.deviation = function(X) {
+        var m = mean(X);
+        return array(X).map(function(x) {
+            return m - x;
+        });
+    };
+    var variance =
+    /**
+     * Calculate a variance of an array
+     *
+     * @param {Array} X An array
+     * @return {Number}
+     * @example
+     * // return 4
+     * statistics.variance([2, 4, 4, 4, 5, 5, 7, 9]);
+     */
+    exports.variance = function(X) {
+        var d = deviation(X);
+        return d.reduce(function(a, b, index) {
+            return a + pow(b, 2);
+        }, 0) / d.length;
+    };
+    var stddev =
+    /**
+     * Calculate a standard deviation of an array
+     *
+     * @param {Array} X An array
+     * @return {Number}
+     * @example
+     * // return 2
+     * statistics.stddev([2, 4, 4, 4, 5, 5, 7, 9]);
+     */
+    exports.stddev = function(X) {
+        return sqrt(variance(X));
+    };
+
+    var gamma =
+    /**
+     * Calculate an approximation of a gamma function via Lanczos approximation
+     * with g=7, n=9 coefficience (a coefficience used in GNU science library)
+     *
+     * @method
+     * @param {Number} z z parameter of the gamma function
+     * @return {Number}
+     * @see {@link https://en.wikipedia.org/wiki/Lanczos_approximation}
+     * @see {@link http://mrob.com/pub/ries/lanczos-gamma.html#fn_1}
+     * @example
+     * // return 24
+     * statistics.gamma(5);
+     * // return approx. -3.5449
+     * statistics.gamma(-0.5);
+     * // return 7
+     * statistics.gamma.g
+     * // return 9
+     * statistics.gamma.n
+     * // return Lanczos approximation coefficience (g=7, n=9) list
+     * statistics.gamma.c
+     */
+    exports.gamma = function(z) {
+        var r;
+        if (isInt(z) &amp;&amp; z &lt;= 0) {
+            return Number.POSITIVE_INFINITY;    // from definition
+        } else if (z &lt; 0.5) {
+            // Euler's reflection formula.
+            // Required to improve quality of the result (e.g z=-20.5)
+            return PI / (Math.sin(PI * z) * gamma(1 - z));
+        } else if (z > 142.2151) {
+            // gamma(z) return Infinity thus use gammaln(z) instead
+            r = exp(gammaln(z));
+        } else {
+            z -= 1;
+            var x = gamma.c[0];
+            for (var i=1; i&lt;gamma.n; i++) {
+                x += gamma.c[i] / (z + i);
+            }
+            var t = z + gamma.g + 0.5;
+            r = sqrt(PI2)
+              * pow(t, z + 0.5)
+              * exp(-t)
+              * x;
+        }
+        // make sure that the return value is an integer if z was integer
+        return isInt(z) ? round(r) : r;
+    };
+    exports.gamma.g = 7;
+    exports.gamma.n = 9;
+    /**
+     * Lanczos approximation coefficience (g=7, n=9)
+     * This coefficience is used in GNU science library
+     * Because of IEEE754 (double), the coefficient is rounded.
+     */
+    exports.gamma.c = [
+        //0.99999999999980993227684700473478,
+            0.9999999999998099,
+        //676.520368121885098567009190444019,
+        676.5203681218851,
+    //-1259.13921672240287047156078755283,
+        -1259.1392167224029,
+        //771.3234287776530788486528258894,
+        771.3234287776531,
+    //-176.61502916214059906584551354,
+        -176.6150291621406,
+        //12.507343278686904814458936853,
+        12.507343278686905,
+        //-0.13857109526572011689554707,
+        -0.13857109526572012,
+        //9.984369578019570859563e-6,
+            9.984369578019571e-6,
+        //1.50563273514931155834e-7,
+            1.5056327351493116e-7
+    ];
+    var gammaln =
+    /**
+     * Calculate a natural log value of an absolute value of an approximation
+     * of a gamma function.
+     * If the specified z is a negative, it calculate a real part of an
+     * imaginary number through a [gamma]{@link module:statistics.gamma}
+     * function and return.
+     *
+     * @param {Number} z z parameter of the gamma function
+     * @return {Number}
+     * @see {@link module:statistics.gamma}
+     * @example
+     * // return approx. 3.1780
+     * statistics.gammaln(5);
+     * // return approx. 0.5723
+     * statistics.gammaln(0.5);
+     * // return approx. 1.2655 which is a real part of an imaginary number
+     * // the correct result is approx. 1.2655 -3.1415i
+     * statistics.gammaln(-0.5);
+     */
+    exports.gammaln = function(z) {
+        if (isInt(z) &amp;&amp; z &lt;= 0) {
+            return Number.POSITIVE_INFINITY; // from definition
+        } else if (0 &lt; z &amp;&amp; z &lt; 0.5) {
+            // Euler's reflection formula.
+            // Required to improve quality of the result (e.g z=-20.5)
+            return log(PI) - log(Math.sin(PI * z)) - gammaln(1 - z);
+        } else if (z &lt; 0) {
+            // log(x) does not allow negative value thus use absolute value
+            // from gamma(x) which return a real part of an imaginary number
+            // (actual correct result for log(x) when x &lt; 0)
+            return log(Math.abs(gamma(z)));
+        }
+        z -= 1;
+        var x = gamma.c[0];
+        for (var i=1; i&lt;gamma.n; i++) {
+            x += gamma.c[i] / (z + i);
+        }
+        var t = z + gamma.g + 0.5;
+        return 0.5 * log(PI2) + (z + 0.5) * log(t) - t + log(x);
+    };
+
+    var beta =
+    /**
+     * Calculate an approximation of a beta function or an incomplete beta
+     * function through a [gamma]{@link module:statistics.gamma} function or a
+     * [regularized incomplete beta]{@link module:statistics.betaic} function
+     * respectively.
+     *
+     * If the third argument is equal to 1 or not specified, it return an
+     * approximation value of a beta function, otherwise it return an
+     * approximation value of an incomplete beta function.
+     *
+     * @param {Number} a a parameter of a beta function
+     * @param {Number} b b parameter of a beta function
+     * @param {Number} [x] x parameter of an incomplete beta function
+     * @return {Number}
+     * @see {@link https://en.wikipedia.org/wiki/Beta_function}
+     * @see {@link http://dlmf.nist.gov/8.17#E2}
+     * @see {@link module:statistics.gamma}
+     * @see {@link module:statistics.betaic}
+     * @example
+     * // beta function
+     * // return approx 4.4776
+     * statistics.beta(1.5, 0.2);
+     * // return approx 0.8127
+     * statistics.beta(0.5, 5.0);
+     *
+     * // incomplete beta function
+     * // return approx 0.0437
+     * statistics.beta(2, 3, 0.4);
+     * // return approx 0.0903
+     * statistics.beta(1, 3, 0.1);
+     *
+     */
+    exports.beta = function(a, b, x) {
+        if (x === undefined || x === 1) {
+            // beta function
+            // use 'betaln' instead of direct calculation to handle large
+            // a, b (otherwise gamma(a)*gamma(b) or gamma(a+b) rapidly reach
+            // positive infinity of javascript).
+            return exp(betaln(a, b));
+        } else {
+            // incomplete beta function
+            return betaic(a, b, x) * beta(a, b);
+        }
+    };
+    var betaln =
+    /**
+     * Calculate a natural log value of an absolute value of an approximation
+     * of a beta function through a [gammaln]{@link module:statistics.gammaln}
+     * function
+     *
+     * @param {Number} a a parameter of a beta function
+     * @param {Number} b b parameter of a beta function
+     * @return {Number}
+     * @see {@link module:statistics.beta}
+     * @example
+     * // return approx 1.2672
+     * statistics.betaln(0.2, 4);
+     */
+    exports.betaln = function(a, b) {
+        var k1 = gammaln(a);
+        var k2 = gammaln(b);
+        var k3 = gammaln(a + b);
+        return (isInf(k1) || isInf(k2) || isInf(k3))
+            ? Number.POSITIVE_INFINITY  // from definition?
+            : k1 + k2 - k3;
+    };
+    var betaic =
+    /**
+     * Calculate an approximation of a regularized incomplete beta function
+     * via solving a
+     * [continued fraction formula]{@link http://dlmf.nist.gov/8.17#E22} of
+     * a regularized incomplete beta function.
+     *
+     * @method
+     * @param {Number} a An a parameter of a regulated beta function
+     * @param {Number} b A b parameter of a beta function
+     * @param {Number} [x] A x parameter of an incomplete beta function
+     * @return {Number}
+     * @see {@link http://dlmf.nist.gov/8.17#E22}
+     * @see {@link http://keisan.casio.com/exec/system/1180573396}
+     * @example
+     * // return approx. 0.5248
+     * statistics.betaic(2, 3, 0.4);
+     * // return approx. 0.6126
+     * statistics.betaic(1, 9, 0.1);
+     */
+    exports.betaic = function(a, b, x) {
+        if (x &lt; 0 || 1 &lt; x) {
+            throw new Error('invalid x is specified. x must be within 0 - 1');
+        } else if (a &lt;= 0 || b &lt;= 0) {
+            throw new Error('invalid a and/or b is specified. a/b must be larger than 0');
+        } else if (x === 0) {
+            return 0;
+        } else if (x === 1) {
+            return 1;
+        }
+        // In case of the following expression, more rapid convergence is
+        // obtained by computing I(b, a, 1-x) and from a basic property,
+        // I(x; a, b) == 1 - I(1-x; b, a) thus use this alternative way
+        if (x > (a + 1)/(a + b + 2) || 1 - x &lt; (b + 1)/(a + b + 2)) {
+            return 1 - betaic(b, a, 1-x);
+        }
+        var K = contfrac(1000, betaic.cfn(a, b, x));
+        var r = -betaln(a, b)
+              + a * log(x)
+              + b * log(1 - x)
+              - log(a)
+              + log(K);
+        return exp(r);
+    };
+    betaic.cfn = function(a, b, x) {
+        // Continued Fraction a/b value generator
+        // Built based on the formula in http://dlmf.nist.gov/8.17#E22
+        var ap1 = a + 1;
+        var am1 = a - 1;
+        var apb = a + b;
+        var ed = function(m, m2) {
+            if (m === 0) return 1;
+            return m * (b - m) * x / ((am1 + m2) * (a + m2));
+        }
+        var od = function(m, m2) {
+            return -1 * (a + m) * (apb + m) * x / ((ap1 + m2) * (a + m2));
+        }
+        return function(k) {
+            if (k === 0) return [0, null];
+            var m = parseInt((k - 1) / 2);
+            return [1, (k - 1) % 2 === 0 ? ed(m, m*2) : od(m, m*2)];
+        };
+    };
+
+    var F =
+    /**
+     * A namespace of functions which related to Snedecor's F distribution
+     *
+     * @namespace
+     * @see {@link https://en.wikipedia.org/wiki/F-distribution}
+     * @see {@link https://en.wikipedia.org/wiki/F-test}
+     */
+    exports.F = {};
+    /**
+     * Return a test statistic of F-test which follow Snedecor's F distribution.
+     * The variance of the sample1 must be larger or equal to sample2.
+     *
+     * @param {Number} u1 A mean value (&lt;span style="text-decoration:overline">X&lt;/span>&lt;sub>1&lt;/sub>) of sample 1 (&lt;strong>dummy, not used&lt;/strong>).
+     * @param {Number} s1 A variance (s&lt;sub>1&lt;/sub>&lt;sup>2&lt;/sup>) of sample 1.
+     * @param {Number} n1 The number of samples (N&lt;sub>1&lt;/sub>) of sample 1.
+     * @param {Number} u2 A mean value (&lt;span style="text-decoration:overline">X&lt;/span>&lt;sub>2&lt;/sub>) of sample 2 (&lt;strong>dummy, not used&lt;/strong>).
+     * @param {Number} s2 A variance (s&lt;sub>2&lt;/sub>&lt;sup>2&lt;/sup>) of sample 2.
+     * @param {Number} n2 The number of samples (N&lt;sub>2&lt;/sub>) of sample 2.
+     * @return {Array} An array which contains a F-test statistic and a degree of freedom of sample 1 and 2 respectively.
+     *                 &lt;code>[F, &amp;nu;&lt;sub>1&lt;/sub>, &amp;nu;&lt;sub>2&lt;/sub>]&lt;/code>
+     * @throws {Error} Will throw an error when s1 is smaller than s2
+     * @see {@link https://en.wikipedia.org/wiki/F-test}
+     * @see {@link module:statistics.F.pdf}
+     * @see {@link module:statistics.F.cdf}
+     * @see {@link module:statistics.F.pvalue}
+     * @example
+     * // return [2, 2, 1]
+     * statistics.F.calc(null, 4, 3, null, 2, 2);
+     * // return [3, 3, 3]
+     * statistics.F.calc(null, 6, 4, null, 2, 3);
+     * // throw an Error('s1 requires to be larger than s2')
+     * statistics.F.calc(null, 6, 4, null, 12, 3);
+     * // Calculate p-value of two sample distribution
+     * statistics.F.pvalue.apply(null, statistics.F.calc(null, 6, 4, null, 2, 3));
+     */
+    exports.F.calc = function(u1, s1, n1, u2, s2, n2) {
+        if (s1 &lt; s2) {
+            return [s2/s1, n2-1, n1-1];
+        } else {
+            return [s1/s2, n1-1, n2-1];
+        }
+    };
+    /**
+     * A probability density function of Snedecor's F distribution.
+     * It use a [beta]{@link module:statistics.beta} function internally.
+     *
+     * @param {Number} x A random X value
+     * @param {Number} d1 A d&lt;sub>1&lt;/sub> parameter of F distribution
+     * @param {Number} d2 A d&lt;sub>2&lt;/sub> parameter of F distribution
+     * @return {Number}
+     * @see {@link https://en.wikipedia.org/wiki/F-distribution}
+     * @see {@link module:statistics.beta}
+     * @see {@link module:statistics.F.calc}
+     * @see {@link module:statistics.F.cdf}
+     * @see {@link module:statistics.F.pvalue}
+     * @example
+     * // Calculate probability of two sample distribution
+     * statistics.F.pdf.apply(null, statistics.F.calc(null, 6, 4, null, 2, 3));
+     */
+    exports.F.pdf = function(x, d1, d2) {
+        var d1h = d1 / 2;
+        var d2h = d2 / 2;
+        var dd = d1 / d2;
+
+        var a = 1 / beta(d1h, d2h);
+        var b = pow(dd, d1h);
+        var c = pow(x, d1h - 1);
+        var d = pow(1 + dd * x, -0.5 * (d1 + d2));
+        return a * b * c * d;
+    };
+    /**
+     * A cummulative distribution function of Snedecor's F distribution.
+     * It use a [betaic]{@link module:statistics.betaic} function internally.
+     *
+     * @param {Number} x A random X value
+     * @param {Number} d1 A d&lt;sub>1&lt;/sub> parameter of F distribution
+     * @param {Number} d2 A d&lt;sub>2&lt;/sub> parameter of F distribution
+     * @return {Number}
+     * @see {@link https://en.wikipedia.org/wiki/F-distribution}
+     * @see {@link module:statistics.betaic}
+     * @see {@link module:statistics.F.calc}
+     * @see {@link module:statistics.F.pdf}
+     * @see {@link module:statistics.F.pvalue}
+     * @example
+     * // Calculate cummulative probability of two sample distribution
+     * statistics.F.cdf.apply(null, statistics.F.calc(null, 6, 4, null, 2, 3));
+     */
+    exports.F.cdf = function(x, d1, d2) {
+        var k = d2 / (d2 + d1 * x);
+        return 1 - betaic(d2/2, d1/2, k);
+    };
+    /**
+     * Calculate an one-tailed p-value of a F-test statistic which can obtain
+     * from {@link module:statistics.F.calc}.
+     * It use a [cdf]{@link module:statistics.F.cdf} function internally.
+     *
+     * @param {Number} x A F-test statistic
+     * @param {Number} d1 A d&lt;sub>1&lt;/sub> parameter of F distribution
+     * @param {Number} d2 A d&lt;sub>2&lt;/sub> parameter of F distribution
+     * @return {Number}
+     * @see {@link https://en.wikipedia.org/wiki/F-distribution}
+     * @see {@link https://en.wikipedia.org/wiki/P-value}
+     * @see {@link https://en.wikipedia.org/wiki/One-_and_two-tailed_tests}
+     * @see {@link module:statistics.F.calc}
+     * @see {@link module:statistics.F.cdf}
+     * @see {@link module:statistics.F.pdf}
+     * @example
+     * // Calculate p-value of two sample distribution
+     * statistics.F.pvalue.apply(null, statistics.F.calc(null, 6, 4, null, 2, 3));
+     */
+    exports.F.pvalue = function(x, d1, d2) {
+        return 1 - F.cdf(x, d1, d2);
+    };
+
+    var T =
+    /**
+     * A namespace of functions which related to Student's T distribution
+     *
+     * @namespace
+     * @see {@link https://en.wikipedia.org/wiki/Student's_t-distribution}
+     * @see {@link https://en.wikipedia.org/wiki/Student's_t-test}
+     * @see {@link https://en.wikipedia.org/wiki/Welch's_t_test}
+     */
+    exports.T = {};
+    /**
+     * Return a test statistic of T-test which follow Student's T distribution
+     * via a Student's t-test. It is used when the variances of two samples are
+     * equal. You may need to test if the two variances are equal or not via a
+     * [F-test]{@link module:statistics.F.pvalue}.
+     * Use a [Welch's t-test]{@link module:statistics.T.welch} instead otherwise.
+     *
+     * @param {Number} u1 A mean value (&lt;span style="text-decoration:overline">X&lt;/span>&lt;sub>1&lt;/sub>) of sample 1.
+     * @param {Number} s1 A variance (s&lt;sub>1&lt;/sub>&lt;sup>2&lt;/sup>) of sample 1.
+     * @param {Number} n1 The number of samples (N&lt;sub>1&lt;/sub>) of sample 1.
+     * @param {Number} u2 A mean value (&lt;span style="text-decoration:overline">X&lt;/span>&lt;sub>2&lt;/sub>) of sample 2.
+     * @param {Number} s2 A variance (s&lt;sub>2&lt;/sub>&lt;sup>2&lt;/sup>) of sample 2.
+     * @param {Number} n2 The number of samples (N&lt;sub>2&lt;/sub>) of sample 2.
+     * @return {Array} An array which contains a T-test statistic and a degree of freedom respectively.
+     *                 &lt;code>[t, &amp;nu;]&lt;/code>
+     * @see {@link https://en.wikipedia.org/wiki/Student's_t-test}
+     * @see {@link https://en.wikipedia.org/wiki/F-test}
+     * @see {@link module:statistics.F.pvalue}
+     * @see {@link module:statistics.T.calc}
+     * @see {@link module:statistics.T.walch}
+     * @see {@link module:statistics.T.pdf}
+     * @see {@link module:statistics.T.cdf}
+     * @see {@link module:statistics.T.pvalue}
+     */
+    exports.T.student = function(u1, s1, n1, u2, s2, n2) {
+        // Note: independent two-sample t-test with equal variance
+        var df = n1 + n2 - 2;
+        if (n1 === n2) {
+            var s = sqrt(s1 + s2);
+            var t = (u1 - u2) / (s * sqrt(1/n1));
+        } else {
+            var s = sqrt((s1 * (n1 - 1) + s2 * (n2 - 1)) / df);
+            var t = (u1 - u2) / (s * sqrt(1/n1 + 1/n2));
+        }
+        return [t, df];
+    };
+    /**
+     * Return a test statistic of T-test which follow Student's T distribution
+     * via a Welch's t-test. It is used when the variances of two samples are
+     * equal or not equal (both case).
+     *
+     * @param {Number} u1 A mean value (&lt;span style="text-decoration:overline">X&lt;/span>&lt;sub>1&lt;/sub>) of sample 1.
+     * @param {Number} s1 A variance (s&lt;sub>1&lt;/sub>&lt;sup>2&lt;/sup>) of sample 1.
+     * @param {Number} n1 The number of samples (N&lt;sub>1&lt;/sub>) of sample 1.
+     * @param {Number} u2 A mean value (&lt;span style="text-decoration:overline">X&lt;/span>&lt;sub>2&lt;/sub>) of sample 2.
+     * @param {Number} s2 A variance (s&lt;sub>2&lt;/sub>&lt;sup>2&lt;/sup>) of sample 2.
+     * @param {Number} n2 The number of samples (N&lt;sub>2&lt;/sub>) of sample 2.
+     * @return {Array} An array which contains a T-test statistic and a degree of freedom respectively.
+     *                 &lt;code>[t, &amp;nu;]&lt;/code>
+     * @see {@link https://en.wikipedia.org/wiki/Welch's_t_test}
+     * @see {@link module:statistics.T.calc}
+     * @see {@link module:statistics.T.student}
+     * @see {@link module:statistics.T.pdf}
+     * @see {@link module:statistics.T.cdf}
+     * @see {@link module:statistics.T.pvalue}
+     */
+    exports.T.welch = function(u1, s1, n1, u2, s2, n2) {
+        // Note: independent two-sample t-test with unequal variance
+        var sn1 = s1 / n1;
+        var sn2 = s2 / n2;
+        var t = (u1 - u2) / sqrt(sn1 + sn2);
+        var a = pow(sn1 + sn2, 2);
+        var b = pow(sn1, 2) / (n1 - 1) + pow(sn2, 2) / (n2 - 1);
+        var df = a / b;
+        return [t, df];
+    };
+    /**
+     * Return a test statistic of T-test which follow Student's T distribution.
+     * It use a [Student's t-test]{@link module:statistics.T.student} when the
+     * variances of two samples are equal and a
+     * [Welch's t-test]{@link module:statistics.T.welch} otherwise.
+     * The equalness of the variances will be tested via
+     * [F-test]{@link module:statistics.F.pvalue} with 0.05 as a critical value.
+     *
+     * @param {Number} u1 A mean value (&lt;span style="text-decoration:overline">X&lt;/span>&lt;sub>1&lt;/sub>) of sample 1.
+     * @param {Number} s1 A variance (s&lt;sub>1&lt;/sub>&lt;sup>2&lt;/sup>) of sample 1.
+     * @param {Number} n1 The number of samples (N&lt;sub>1&lt;/sub>) of sample 1.
+     * @param {Number} u2 A mean value (&lt;span style="text-decoration:overline">X&lt;/span>&lt;sub>2&lt;/sub>) of sample 2.
+     * @param {Number} s2 A variance (s&lt;sub>2&lt;/sub>&lt;sup>2&lt;/sup>) of sample 2.
+     * @param {Number} n2 The number of samples (N&lt;sub>2&lt;/sub>) of sample 2.
+     * @return {Array} An array which contains a T-test statistic and a degree of freedom respectively.
+     *                 &lt;code>[t, &amp;nu;]&lt;/code>
+     * @see {@link https://en.wikipedia.org/wiki/Student's_t-test}
+     * @see {@link https://en.wikipedia.org/wiki/Welch's_t_test}
+     * @see {@link https://en.wikipedia.org/wiki/F-test}
+     * @see {@link module:statistics.F.pvalue}
+     * @see {@link module:statistics.T.student}
+     * @see {@link module:statistics.T.welch}
+     * @see {@link module:statistics.T.pdf}
+     * @see {@link module:statistics.T.cdf}
+     * @see {@link module:statistics.T.pvalue}
+     */
+    exports.T.calc = function(u1, s1, n1, u2, s2, n2) {
+        var p = F.pvalue.apply(null, F.calc(u1, s1, n1, u2, s2, n2));
+        if (p &lt; 0.05) {
+            return T.welch(u1, s1, n1, u2, s2, n2);
+        } else {
+            return T.student(u1, s1, n1, u2, s2, n2);
+        }
+    };
+    /**
+     * A probability density function of Student's T distribution.
+     * It use a [gamma]{@link module:statistics.gamma} function internally.
+     *
+     * @param {Number} t A random t value
+     * @param {Number} df A degree of freedom (&amp;nu;) parameter of T distribution
+     * @return {Number}
+     * @see {@link https://en.wikipedia.org/wiki/Student's_t-distribution}
+     * @see {@link module:statistics.gamma}
+     * @see {@link module:statistics.T.calc}
+     * @see {@link module:statistics.T.student}
+     * @see {@link module:statistics.T.welch}
+     * @see {@link module:statistics.T.cdf}
+     * @see {@link module:statistics.T.pvalue}
+     */
+    exports.T.pdf = function(t, df) {
+        var a = (df + 1) / 2;
+        var b = gamma(a) / (sqrt(df * PI) * gamma(df / 2));
+        var c = 1 + pow(t, 2) / df;
+        return b * pow(c, -a);
+    };
+    /**
+     * A cummulative distribution function of Student's T distribution.
+     * It use a [betaic]{@link module:statistics.betaic} function internally.
+     *
+     * @param {Number} t A random t value
+     * @param {Number} df A degree of freedom (&amp;nu;) parameter of T distribution
+     * @return {Number}
+     * @see {@link https://en.wikipedia.org/wiki/Student's_t-distribution}
+     * @see {@link http://www.boost.org/doc/libs/1_37_0/libs/math/doc/sf_and_dist/html/math_toolkit/dist/dist_ref/dists/students_t_dist.html}
+     * @see {@link module:statistics.betaic}
+     * @see {@link module:statistics.T.calc}
+     * @see {@link module:statistics.T.student}
+     * @see {@link module:statistics.T.welch}
+     * @see {@link module:statistics.T.pdf}
+     * @see {@link module:statistics.T.pvalue}
+     */
+    exports.T.cdf = function(t, df) {
+        var ts = pow(t, 2);
+        var z;
+        if (df &lt; 2 * ts) {
+            z = betaic(df/2, 0.5, df/(df+ts)) / 2;
+        } else {
+            z = (1 - betaic(0.5, df/2, ts/(df+ts))) / 2;
+        }
+        return t > 0 ? 1 - z : z;
+    };
+    /**
+     * Calculate a two-tailed p-value or an one-tailed p-value of a T-test
+     * statistic and a degree of freedom which can obtain from
+     * {@link module:statistics.T.calc}.
+     * It use a [betaic]{@link module:statistics.betaic} or a
+     * [cdf]{@link module:statistics.T.cdf} function internally.
+     *
+     * @param {Number} t A T-test statistic value
+     * @param {Number} df A degree of freedom (&amp;nu;) parameter of T distribution
+     * @param {Boolean} [onetail] If it is true, return p-value of one-tailed test,
+     *                            otherwise it return p-value of two-tailed test.
+     *                            The default value is false.
+     * @return {Number}
+     * @see {@link https://en.wikipedia.org/wiki/Student's_t-test}
+     * @see {@link https://en.wikipedia.org/wiki/Welch's_t_test}
+     * @see {@link https://en.wikipedia.org/wiki/P-value}
+     * @see {@link https://en.wikipedia.org/wiki/One-_and_two-tailed_tests}
+     * @see {@link module:statistics.betaic}
+     * @see {@link module:statistics.T.calc}
+     * @see {@link module:statistics.T.student}
+     * @see {@link module:statistics.T.welch}
+     * @see {@link module:statistics.T.pdf}
+     * @see {@link module:statistics.T.cdf}
+     */
+    exports.T.pvalue = function(t, df, onetail) {
+        var z;
+        if (onetail) {
+            z = T.cdf(t, df);
+        } else {
+            // A(t|v) = Fv(t) - Fv(-t) = 1 - I(v/v+t^2; v/2, 1/2)
+            z = 1 - betaic(df/2, 1/2, df/(df + pow(t, 2)));
+        }
+        return 1 - z;
+    };
+    return exports;
+})(typeof exports !== 'undefined' ? exports : window.calcs = {});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-statistics.html">statistics</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-statistics.F.html">F</a></li><li><a href="module-statistics.T.html">T</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.3</a> on Thu Oct 29 2015 20:56:16 GMT+0900 (JST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

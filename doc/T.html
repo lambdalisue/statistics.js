@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: T</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Namespace: T</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        T
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">A namespace of functions which related to Student's T distribution</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line622">line 622</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Student's_t-distribution">https://en.wikipedia.org/wiki/Student's_t-distribution</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/Student's_t-test">https://en.wikipedia.org/wiki/Student's_t-test</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/Welch's_t_test">https://en.wikipedia.org/wiki/Welch's_t_test</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".cdf"><span class="type-signature">(static) </span>cdf<span class="signature">(t, df)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+<div class="description">
+    A cummulative distribution function of Student's T distribution.
+It use a betaic function internally.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>t</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A random t value</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>df</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A degree of freedom (&nu;) parameter of T distribution</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line752">line 752</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Student's_t-distribution">https://en.wikipedia.org/wiki/Student's_t-distribution</a></li>
+        
+            <li><a href="http://www.boost.org/doc/libs/1_37_0/libs/math/doc/sf_and_dist/html/math_toolkit/dist/dist_ref/dists/students_t_dist.html">http://www.boost.org/doc/libs/1_37_0/libs/math/doc/sf_and_dist/html/math_toolkit/dist/dist_ref/dists/students_t_dist.html</a></li>
+        
+            <li>module:statistic.betaic</li>
+        
+            <li>module:statistic.T.statistic</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".pdf"><span class="type-signature">(static) </span>pdf<span class="signature">(t, df)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+<div class="description">
+    A probability density function of Student's T distribution.
+It use a gamma function internally.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>t</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A random t value</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>df</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A degree of freedom (&nu;) parameter of T distribution</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line734">line 734</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Student's_t-distribution">https://en.wikipedia.org/wiki/Student's_t-distribution</a></li>
+        
+            <li>module:statistic.gamma</li>
+        
+            <li>module:statistic.T.statistic</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".pvalue"><span class="type-signature">(static) </span>pvalue<span class="signature">(t, df, onetail<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Calculate a two-tailed p-value or an one-tailed p-value of a T-test
+statistic and a degree of freedom which can obtain from
+module:statistic.T.statistic.
+It use a betaic or a
+cdf function internally.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>t</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">A T-test statistic value</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>df</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">A degree of freedom (&nu;) parameter of T distribution</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>onetail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">If it is true, return p-value of one-tailed test,
+                           otherwise it return p-value of two-tailed test.
+                           The default value is false.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line783">line 783</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Student's_t-test">https://en.wikipedia.org/wiki/Student's_t-test</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/Welch's_t_test">https://en.wikipedia.org/wiki/Welch's_t_test</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/P-value">https://en.wikipedia.org/wiki/P-value</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/One-_and_two-tailed_tests">https://en.wikipedia.org/wiki/One-_and_two-tailed_tests</a></li>
+        
+            <li>module:statistic.T.statistic</li>
+        
+            <li>module:statistic.T.cdf</li>
+        
+            <li>module:statistic.betaic</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".statistic"><span class="type-signature">(static) </span>statistic<span class="signature">(u1, s1, n1, u2, s2, n2)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Return a test statistic of T-test which follow Student's T distribution.
+It use a Student's t-test when the
+variances of two samples are equal and a
+Welch's t-test otherwise.
+The equalness of the variances will be tested via
+F-test with 0.05 as a critical value.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>u1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A mean value (<span style="text-decoration:overline">X</span><sub>1</sub>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A variance (s<sub>1</sub><sup>2</sup>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of samples (N<sub>1</sub>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>u2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A mean value (<span style="text-decoration:overline">X</span><sub>2</sub>) of sample 2.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A variance (s<sub>2</sub><sup>2</sup>) of sample 2.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of samples (N<sub>2</sub>) of sample 2.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line649">line 649</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Student's_t-test">https://en.wikipedia.org/wiki/Student's_t-test</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/Welch's_t_test">https://en.wikipedia.org/wiki/Welch's_t_test</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/F-test">https://en.wikipedia.org/wiki/F-test</a></li>
+        
+            <li>module:statistic.F</li>
+        
+            <li>module:statistic.T.student</li>
+        
+            <li>module:statistic.T.welch</li>
+        
+            <li>module:statistic.T.pdf</li>
+        
+            <li>module:statistic.T.cdf</li>
+        
+            <li>module:statistic.T.pvalue</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An array which contains a T-test statistic and a degree of freedom respectively.
+                <code>[t, &nu;]</code>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".student"><span class="type-signature">(static) </span>student<span class="signature">(u1, s1, n1, u2, s2, n2)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Return a test statistic of T-test which follow Student's T distribution
+via a Student's t-test. It is used when the variances of two samples are
+equal. You may need to test if the two variances are equal or not via a
+F-test.
+Use a Welch's t-test instead otherwise.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>u1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A mean value (<span style="text-decoration:overline">X</span><sub>1</sub>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A variance (s<sub>1</sub><sup>2</sup>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of samples (N<sub>1</sub>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>u2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A mean value (<span style="text-decoration:overline">X</span><sub>2</sub>) of sample 2.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A variance (s<sub>2</sub><sup>2</sup>) of sample 2.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of samples (N<sub>2</sub>) of sample 2.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line681">line 681</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Student's_t-test">https://en.wikipedia.org/wiki/Student's_t-test</a></li>
+        
+            <li><a href="https://en.wikipedia.org/wiki/F-test">https://en.wikipedia.org/wiki/F-test</a></li>
+        
+            <li>module:statistic.F.statistic</li>
+        
+            <li>module:statistic.T.statistic</li>
+        
+            <li>module:statistic.T.walch</li>
+        
+            <li>module:statistic.T.pdf</li>
+        
+            <li>module:statistic.T.cdf</li>
+        
+            <li>module:statistic.T.pvalue</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An array which contains a T-test statistic and a degree of freedom respectively.
+                <code>[t, &nu;]</code>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".welch"><span class="type-signature">(static) </span>welch<span class="signature">(u1, s1, n1, u2, s2, n2)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Return a test statistic of T-test which follow Student's T distribution
+via a Welch's t-test. It is used when the variances of two samples are
+equal or not equal (both case).
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>u1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A mean value (<span style="text-decoration:overline">X</span><sub>1</sub>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A variance (s<sub>1</sub><sup>2</sup>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of samples (N<sub>1</sub>) of sample 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>u2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A mean value (<span style="text-decoration:overline">X</span><sub>2</sub>) of sample 2.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A variance (s<sub>2</sub><sup>2</sup>) of sample 2.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of samples (N<sub>2</sub>) of sample 2.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statistics.js.html">statistics.js</a>, <a href="statistics.js.html#line713">line 713</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Welch's_t_test">https://en.wikipedia.org/wiki/Welch's_t_test</a></li>
+        
+            <li>module:statistic.T.statistic</li>
+        
+            <li>module:statistic.T.student</li>
+        
+            <li>module:statistic.T.pdf</li>
+        
+            <li>module:statistic.T.cdf</li>
+        
+            <li>module:statistic.T.pvalue</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An array which contains a T-test statistic and a degree of freedom respectively.
+                <code>[t, &nu;]</code>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="F.html">F</a></li><li><a href="T.html">T</a></li></ul><h3>Global</h3><ul><li><a href="global.html#array">array</a></li><li><a href="global.html#beta">beta</a></li><li><a href="global.html#betaic">betaic</a></li><li><a href="global.html#betaln">betaln</a></li><li><a href="global.html#deviation">deviation</a></li><li><a href="global.html#factorial">factorial</a></li><li><a href="global.html#gamma">gamma</a></li><li><a href="global.html#gammaln">gammaln</a></li><li><a href="global.html#max">max</a></li><li><a href="global.html#mean">mean</a></li><li><a href="global.html#median">median</a></li><li><a href="global.html#memoize">memoize</a></li><li><a href="global.html#min">min</a></li><li><a href="global.html#range">range</a></li><li><a href="global.html#stddev">stddev</a></li><li><a href="global.html#sum">sum</a></li><li><a href="global.html#variance">variance</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.3</a> on Thu Oct 29 2015 06:23:27 GMT+0900 (JST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
